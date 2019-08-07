@@ -6,8 +6,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using todoapi.AppOptions;
+using todoapi.Contracts;
 using todoapi.Services;
-using todoapi.Services.Impl;
 
 namespace todoapi
 {

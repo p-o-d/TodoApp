@@ -3,8 +3,9 @@ using System.Linq;
 using System.Security.Cryptography;
 using Microsoft.Extensions.Options;
 using todoapi.AppOptions;
+using todoapi.Contracts;
 
-namespace todoapi.Services.Impl
+namespace todoapi.Services
 {
     public class PasswordHasher : IPasswordHasher
     {

@@ -5,7 +5,7 @@ using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
 using todoapi.Dtos;
-using todoapi.Services;
+using todoapi.Contracts;
 
 namespace todoapi.Controllers
 {

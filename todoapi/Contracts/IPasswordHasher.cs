@@ -1,4 +1,4 @@
-namespace todoapi.Services
+namespace todoapi.Contracts
 {
     public interface IPasswordHasher
     {

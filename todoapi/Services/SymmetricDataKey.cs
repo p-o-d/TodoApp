@@ -1,8 +1,9 @@
 using System.Text;
 using Microsoft.IdentityModel.JsonWebTokens;
 using Microsoft.IdentityModel.Tokens;
+using todoapi.Contracts;
 
-namespace todoapi.Services.Impl
+namespace todoapi.Services
 {
     public class SymmetricDataKey : IDataEncodingKey, IDataDecodingKey
     {

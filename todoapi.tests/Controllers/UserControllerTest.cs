@@ -7,7 +7,7 @@ using Moq;
 using todoapi.Controllers;
 using todoapi.Dtos;
 using todoapi.Entities;
-using todoapi.Services;
+using todoapi.Contracts;
 using Xunit;
 
 namespace todoapi.tests.Controllers

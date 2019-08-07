@@ -1,7 +1,7 @@
 using todoapi.Dtos;
 using todoapi.Entities;
 
-namespace todoapi.Services
+namespace todoapi.Contracts
 {
     public interface IUserService
     {

@@ -3,6 +3,7 @@ using Microsoft.Extensions.Options;
 using Xunit;
 using todoapi.Services.Impl;
 using System;
+using todoapi.Services;
 
 namespace todoapi.tests.Services
 {
