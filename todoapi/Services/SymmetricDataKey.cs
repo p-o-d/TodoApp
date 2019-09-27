@@ -5,7 +5,7 @@ using todoapi.Contracts;
 
 namespace todoapi.Services
 {
-    public class SymmetricDataKey : IDataEncodingKey, IDataDecodingKey
+    public abstract class SymmetricDataKey : IDataEncodingKey, IDataDecodingKey
     {
         public string SigningAlgorithm => JwtConstants.DirectKeyUseAlg;
 
@@ -13,7 +13,7 @@ namespace todoapi.Services
 
         public SecurityKey Key { get; }
 
-        public SymmetricDataKey(string key)
+        protected SymmetricDataKey(string key)
         {
             Key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(key));
         }

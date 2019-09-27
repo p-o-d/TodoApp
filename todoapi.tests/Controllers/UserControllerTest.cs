@@ -9,6 +9,8 @@ using todoapi.Dtos;
 using todoapi.Entities;
 using todoapi.Contracts;
 using Xunit;
+using Microsoft.Extensions.Options;
+using todoapi.AppOptions;
 
 namespace todoapi.tests.Controllers
 {
@@ -38,6 +40,8 @@ namespace todoapi.tests.Controllers
                     Name = "testname",
                 });
 
+            var options = Options.Create(new JWTOptions{ Issuer = "testIssuer", Audience = "testAudience", ExpiresInMins = 1440 });
+
             string signatureKeyString = "CxUZLVUtuT2Yi42H9WnBkdcLfLkucZcj";
             var signatureKeyMock = new Mock<ISignatureEncodingKey>();
             signatureKeyMock
@@ -64,7 +68,8 @@ namespace todoapi.tests.Controllers
         //When
             var loginResult = userController.Login(credentials, 
                                                    signatureKeyMock.Object, 
-                                                   dataKeyMock.Object);
+                                                   dataKeyMock.Object,
+                                                   options);
         //Then
             Assert.IsAssignableFrom<OkObjectResult>(loginResult);
         }

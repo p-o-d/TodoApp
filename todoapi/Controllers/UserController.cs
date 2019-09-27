@@ -6,10 +6,13 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
 using todoapi.Dtos;
 using todoapi.Contracts;
+using Microsoft.Extensions.Options;
+using todoapi.AppOptions;
+using Microsoft.AspNetCore.Authorization;
 
 namespace todoapi.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/users")]
     [ApiController]
     public class UserController : ControllerBase
     {
@@ -22,10 +25,19 @@ namespace todoapi.Controllers
             _mapper = mapper;
         }
 
-        [HttpPost]
+        [AllowAnonymous]
+        [HttpPost("value")]
+        public IActionResult Value()
+        {
+            return Ok(5);
+        }
+
+        [AllowAnonymous]
+        [HttpPost("login")]
         public IActionResult Login([FromBody] AuthCredentialsDto credentials,
                                    [FromServices] ISignatureEncodingKey signatureKey,
-                                   [FromServices] IDataEncodingKey dataKey)
+                                   [FromServices] IDataEncodingKey dataKey,
+                                   [FromServices] IOptions<JWTOptions> jwtOpions)
         {
             var user = _userService.Login(credentials);
             if(user == null)
@@ -38,11 +50,11 @@ namespace todoapi.Controllers
 
             var tokenHandler = new JwtSecurityTokenHandler();
             JwtSecurityToken token = tokenHandler.CreateJwtSecurityToken(
-                issuer: "todoapp",
-                audience: "todoappclient",
+                issuer: jwtOpions.Value.Issuer,
+                audience: jwtOpions.Value.Audience,
                 subject: new ClaimsIdentity(claims),
                 notBefore: DateTime.Now,
-                expires: DateTime.Now.AddDays(1),
+                expires: DateTime.Now.AddMinutes(jwtOpions.Value.ExpiresInMins),
                 issuedAt: DateTime.Now,
                 signingCredentials: new SigningCredentials(
                     signatureKey.Key,
